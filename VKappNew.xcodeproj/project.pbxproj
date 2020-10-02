@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,12 @@
 		E944345E2525C66400DBCEE4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E944345C2525C66400DBCEE4 /* Main.storyboard */; };
 		E94434602525C66500DBCEE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E944345F2525C66500DBCEE4 /* Assets.xcassets */; };
 		E94434632525C66500DBCEE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E94434612525C66500DBCEE4 /* LaunchScreen.storyboard */; };
+		E9EBE34F25260DFC00AF78E1 /* VKRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBE34E25260DFC00AF78E1 /* VKRequest.swift */; };
+		E9EBE35425260E0C00AF78E1 /* VKSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBE35325260E0C00AF78E1 /* VKSession.swift */; };
+		E9EBE35725260E2800AF78E1 /* VKLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBE35625260E2800AF78E1 /* VKLoginViewController.swift */; };
+		E9EBE35E2526160500AF78E1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBE35D2526160500AF78E1 /* User.swift */; };
+		E9EBE3612526161700AF78E1 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBE3602526161700AF78E1 /* Group.swift */; };
+		E9EBE37C25270ECF00AF78E1 /* FriendsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBE37B25270ECF00AF78E1 /* FriendsListController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +33,12 @@
 		E944345F2525C66500DBCEE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E94434622525C66500DBCEE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E94434642525C66500DBCEE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E9EBE34E25260DFC00AF78E1 /* VKRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKRequest.swift; sourceTree = "<group>"; };
+		E9EBE35325260E0C00AF78E1 /* VKSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKSession.swift; sourceTree = "<group>"; };
+		E9EBE35625260E2800AF78E1 /* VKLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKLoginViewController.swift; sourceTree = "<group>"; };
+		E9EBE35D2526160500AF78E1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E9EBE3602526161700AF78E1 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		E9EBE37B25270ECF00AF78E1 /* FriendsListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListController.swift; sourceTree = "<group>"; };
 		FF200DC967BA51062CE39947 /* Pods_VKappNew.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKappNew.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -56,7 +68,6 @@
 				3D9E670C764FB1DD43181322 /* Pods-VKappNew.debug.xcconfig */,
 				358E27F5733D68B0150FFF5F /* Pods-VKappNew.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -81,6 +92,18 @@
 		E94434552525C66400DBCEE4 /* VKappNew */ = {
 			isa = PBXGroup;
 			children = (
+				E9EBE34B25260D8800AF78E1 /* supportedFiles */,
+				E9EBE35B25260E5400AF78E1 /* Request */,
+				E9EBE35925260E2F00AF78E1 /* Login */,
+				E9EBE3632526161C00AF78E1 /* Model */,
+				E9EBE37B25270ECF00AF78E1 /* FriendsListController.swift */,
+			);
+			path = VKappNew;
+			sourceTree = "<group>";
+		};
+		E9EBE34B25260D8800AF78E1 /* supportedFiles */ = {
+			isa = PBXGroup;
+			children = (
 				E94434562525C66400DBCEE4 /* AppDelegate.swift */,
 				E94434582525C66400DBCEE4 /* SceneDelegate.swift */,
 				E944345A2525C66400DBCEE4 /* ViewController.swift */,
@@ -89,7 +112,33 @@
 				E94434612525C66500DBCEE4 /* LaunchScreen.storyboard */,
 				E94434642525C66500DBCEE4 /* Info.plist */,
 			);
-			path = VKappNew;
+			path = supportedFiles;
+			sourceTree = "<group>";
+		};
+		E9EBE35925260E2F00AF78E1 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				E9EBE35625260E2800AF78E1 /* VKLoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		E9EBE35B25260E5400AF78E1 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				E9EBE34E25260DFC00AF78E1 /* VKRequest.swift */,
+				E9EBE35325260E0C00AF78E1 /* VKSession.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		E9EBE3632526161C00AF78E1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E9EBE35D2526160500AF78E1 /* User.swift */,
+				E9EBE3602526161700AF78E1 /* Group.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -206,9 +255,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9EBE37C25270ECF00AF78E1 /* FriendsListController.swift in Sources */,
+				E9EBE34F25260DFC00AF78E1 /* VKRequest.swift in Sources */,
+				E9EBE35725260E2800AF78E1 /* VKLoginViewController.swift in Sources */,
 				E944345B2525C66400DBCEE4 /* ViewController.swift in Sources */,
+				E9EBE3612526161700AF78E1 /* Group.swift in Sources */,
 				E94434572525C66400DBCEE4 /* AppDelegate.swift in Sources */,
+				E9EBE35425260E0C00AF78E1 /* VKSession.swift in Sources */,
 				E94434592525C66400DBCEE4 /* SceneDelegate.swift in Sources */,
+				E9EBE35E2526160500AF78E1 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,7 +413,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CPVY75N58Y;
-				INFOPLIST_FILE = VKappNew/Info.plist;
+				INFOPLIST_FILE = VKappNew/supportedFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -378,7 +433,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CPVY75N58Y;
-				INFOPLIST_FILE = VKappNew/Info.plist;
+				INFOPLIST_FILE = VKappNew/supportedFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
