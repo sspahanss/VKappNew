@@ -53,17 +53,34 @@ extension VKLoginController: WKNavigationDelegate {
             return
         }
         
-        Session.shared.token = token
-        Session.shared.userID = userId
-        debugPrint(Session.shared.token, "это токен")
+        Session.instance.token = token
+        Session.instance.userID = userId
+        debugPrint(Session.instance.token, "это токен")
         
         
         
         performSegue(withIdentifier: "VKLogin", sender: nil)
         decisionHandler(.cancel)
-        vkRequest.getFriends()
-        vkRequest.getGroup()
-        
+   
     }
     
+}
+extension UIImage {
+    static func getImage(from string: String) -> UIImage? {
+        guard let url = URL(string: string)
+            else {
+                print("Unable to create URL")
+                return nil
+        }
+        
+        var image: UIImage? = nil
+        do {
+            let data = try Data(contentsOf: url, options: [])
+            image = UIImage(data: data)
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+        return image
+    }
 }

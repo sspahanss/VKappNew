@@ -30,38 +30,5 @@ class VKRequests {
         
     }
     
-    func getGroup() {
-        var urlComponents = URLComponents()
-        urlComponents.scheme = "https"
-        urlComponents.host = "api.vk.com"
-        urlComponents.path = "/method/groups.get"
-        urlComponents.queryItems = [
-            URLQueryItem(name: "user_ids", value: "7611056"),
-            URLQueryItem(name: "access_token", value: Session.shared.token),
-            URLQueryItem(name: "extended", value: "1"),
-            URLQueryItem(name: "v", value: "5.68")
-        ]
-        AF.request(urlComponents.url!).responseJSON { response in
-            print(response)
-        }
-    }
-    
-    func getFriends() {
-        var urlComponents = URLComponents()
-        urlComponents.scheme = "https"
-        urlComponents.host = "api.vk.com"
-        urlComponents.path = "/method/friends.get"
-        urlComponents.queryItems = [
-            URLQueryItem(name: "user_ids", value: "7611056"),
-            URLQueryItem(name: "access_token", value: Session.shared.token),
-            URLQueryItem(name: "fields", value: "domain"),
-            URLQueryItem(name: "v", value: "5.68")
-            
-        ]
-        
-        AF.request(urlComponents.url!).responseJSON { response in
-            print(response)
-        }
-    }
-
+  
 }
