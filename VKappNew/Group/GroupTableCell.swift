@@ -32,7 +32,7 @@ class GroupTableViewCell: UITableViewCell {
             initialSpringVelocity: 0.8,
             options:.curveEaseInOut,
             animations: { [weak self] in
-                self!.frame.origin.x+=70
+                self!.frame.origin.x += 70
         })
     }
 }

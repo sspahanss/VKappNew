@@ -10,11 +10,9 @@ import WebKit
 import Alamofire
 import RealmSwift
 
-/// Сервис для работы с сервером VK
+
 class DataService {
-    
-    /// Метод для получения всех друзей пользователя
-    /// - Parameter completion: замыкание для возврата данных
+
     static func getAllFriends(
         completion: @escaping (_ array : Results<User>?) -> Void){
         let params: Parameters = [
@@ -26,8 +24,7 @@ class DataService {
             completion: completion
         )
     }
-    
-    /// Метод для обновления информации о друзьях
+
     static func updateAllFriends(){
         let params: Parameters = [
             "fields": "nickname, domain, sex, photo_100"
@@ -39,7 +36,7 @@ class DataService {
         )
     }
     
-    /// Метод для обновления информации о друзьях c Operation
+   
     static func updateAllFriendsWithOperation(){
         let params: Parameters = [
             "fields": "nickname, domain, sex, photo_100"
@@ -51,8 +48,7 @@ class DataService {
         )
     }
     
-    /// Метод для получения всех групп пользователя
-    /// - Parameter completion: замыкание для возврата данных
+ 
     static func getAllGroups(
         completion: @escaping (_ array : Results<Group>?) -> Void){
         let params: Parameters = [
@@ -66,7 +62,7 @@ class DataService {
         )
     }
     
-    /// Метод для обновления всех групп пользователя
+  
     static func updateAllGroups(){
         let params: Parameters = [
             "extended": "1",
@@ -78,8 +74,7 @@ class DataService {
             dataType: Group.self
         )
     }
-    
-    /// Метод для обновления всех групп пользователя c Operation
+
     static func updateAllGroupsWithOperation(){
         let params: Parameters = [
             "extended": "1",
@@ -91,11 +86,7 @@ class DataService {
             dataType: Group.self
         )
     }
-    
-    /// Метод для получения всех фотографий конкретного пользователя
-    /// - Parameters:
-    ///   - userId: id пользователя
-    ///   - completion: замыкание для возврата данных
+
     static func getAllPhotosForUser(userId : Int,
                                     completion: @escaping (_ array : Results<Photo>?) -> Void) {
         let params: Parameters = [
@@ -114,10 +105,7 @@ class DataService {
         }
     }
     
-    /// Метод для получения групп по поисковому запросу
-    /// - Parameters:
-    ///   - searchText: искомый текст
-    ///   - completion: замыкание для возврата данных
+
     static func getSearchedGroups(searchText : String,
                                   completion: @escaping (_ array : Results<Group>?) -> Void) {
         let params: Parameters = [
@@ -136,8 +124,7 @@ class DataService {
         }
     }
     
-    /// Метод для получения новостей с сервера
-    /// - Parameter completion: замыкание для возврата данных
+
     static func getNewsfeed(startTime: String = "", startFrom: String = "", completion: @escaping (_ array : NewsItems?) -> Void) {
         var params: Parameters = [
             "count" : 20,
@@ -175,9 +162,7 @@ class DataService {
                     }
         }
     }
-    
-    /// Метод для получения ленты с комментариями
-    /// - Parameter completion: замыкание для возврата
+
     static func getNewsfeedComments(completion: @escaping (_ array : NewsItems?) -> Void) {
         let params: Parameters = [
             "last_comments_count" : 10,
@@ -210,10 +195,7 @@ class DataService {
         }
     }
     
-    /// Метод для получения пользователея по ид
-    /// - Parameters:
-    ///   - userId: идентификатор пользователя
-    ///   - completion: замыкание для возврата данных
+
     static func getUserById(userId : Int,
                             completion: @escaping (_ array : User?) -> Void) {
         let params: Parameters = [
@@ -235,12 +217,7 @@ class DataService {
                     }
         }
     }
-    
-    /// Метод для получения универсальных данных с сервера
-    /// - Parameters:
-    ///   - method: метод запроса
-    ///   - parameters: параметры для запроса
-    ///   - completion: замыкание для возврата данных
+
     private static func getServerData<T : Decodable & Object & HaveID>(method : Methods,
                                                                        with parameters: Parameters,
                                                                        completion: @escaping (_ array : Results<T>?) -> Void){
@@ -250,18 +227,14 @@ class DataService {
                     guard let data = response.data else { return }
                     let array: [T]? = decodeRequestData(method: method, data: data)
                     if let array = array {
-                        //сохрняем данные в БД
+                       
                         RealmService.saveData(array)
-                        //получаем сохраненные данные из БД, чтобы получился Results<T>
+                      
                         completion(RealmService.getData())
                     }
         }
     }
     
-    /// Метод для получения универсальных данных с сервера без комплишна
-    /// - Parameters:
-    ///   - method: метод запроса
-    ///   - parameters: параметры для запроса
     private static func getServerData<T : Decodable & Object & HaveID>(method : Methods,
                                                                        with parameters: Parameters,
                                                                        dataType : T.Type) {
@@ -274,7 +247,7 @@ class DataService {
                     array = decodeRequestData(method: method, data: data)
                     DispatchQueue.main.async {
                         if let array = array {
-                            //сохрняем данные в БД
+                         
                             RealmService.saveData(array)
                         }
                     }
@@ -300,10 +273,7 @@ class DataService {
         OperationQueue.main.addOperation(realmSaver)
     }
     
-    /// Метод для отправки запроса на сервер
-    /// - Parameters:
-    ///   - item: добавляемый/изменяемый объект
-    ///   - method: метод запроса
+ 
     static func postDataToServer<T: Object & Codable>(for item: T, method : Methods){
         switch method {
         case .joinGroup, .leaveGroup:
@@ -319,11 +289,7 @@ class DataService {
         }
     }
     
-    /// Метод для преобразования json в указанную модель
-    /// - Parameters:
-    ///   - method: метод, по которому определяется тип возвращаемых данных
-    ///   - data: json
-    /// - Returns: опциональный массив с объектами
+
     private static func decodeRequestData<T : Object & Decodable>(method : Methods,
                                                                   data: Data) -> [T]? {
         var array = Array<Any>()
@@ -357,11 +323,7 @@ class DataService {
         return array as? [T]
     }
     
-    
-    
-    /// Метод для формаирования полных параметров запроса, включая токен и номер версии АПИ
-    /// - Parameter params: параметры запроса
-    /// - Returns: полные параметры для запроса
+
     private static func getFullParameters(_ params : Parameters) -> Parameters {
         var parameters = params
         parameters["access_token"] = Session.instance.token
@@ -369,14 +331,12 @@ class DataService {
         return parameters
     }
     
-    
-    /// Типы запросов
+ 
     private enum RequestTypes: String {
         case auth
         case method
     }
-    
-    /// Типы методов
+ 
     enum Methods: String {
         case getFriends = "friends.get"
         case authorize

@@ -18,9 +18,9 @@ class AnimationPushController: NSObject, UIViewControllerAnimatedTransitioning {
         transitionContext.containerView.addSubview(destination.view)
         destination.view.frame = source.view.frame
         
-        destination.view.transform = CustomNavigationController.transform(frame: destination.view.frame, on: .pi*3/2)
+        destination.view.transform = CustomNavigationController.transform(frame: destination.view.frame, on: .pi * 3 / 2)
         
-        //почему то без кейфрейма не сработало
+        
         UIView.animateKeyframes(withDuration: self.transitionDuration(using: transitionContext),
                                 delay: 0,
                                 options: .calculationModePaced,
@@ -29,11 +29,11 @@ class AnimationPushController: NSObject, UIViewControllerAnimatedTransitioning {
                                                        relativeDuration: 1,
                                                        animations: {
                                                         destination.view.transform = .identity
-                                                        source.view.transform = CustomNavigationController.transform(frame: source.view.frame, on: .pi/2)
+                                                        source.view.transform = CustomNavigationController.transform(frame: source.view.frame, on: .pi / 2)
                                     })
         }) { finished in
             if finished && !transitionContext.transitionWasCancelled {
-                //source.removeFromParent()
+             
             } else if transitionContext.transitionWasCancelled {
                 destination.view.transform = .identity
             }

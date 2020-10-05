@@ -26,9 +26,9 @@ class RealmSaver : Operation {
                 do {
                     Realm.Configuration.defaultConfiguration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
                     let realm = try Realm()
-                    //print(realm.configuration.fileURL)
+                   
                     realm.beginWrite()
-                    //через switch не получилось
+                    
                     if data is [Photo] {
                         let objects = realm.objects(Photo.self).filter(NSPredicate(format: "ownerID == %@", NSNumber(value: (data[0] as! Photo).ownerID)))
                         if !objects.isEmpty && !self.withoutDelete{
@@ -40,7 +40,7 @@ class RealmSaver : Operation {
                                 print("Удален объект типа \(Photo.self) с ИД = \(object.id)")
                             }
                         }
-                        //для остальных - нужно удалить элементы, которых больше нет в БД
+                       
                     } else if data is [User]{
                         self.deleteObjects(realm: realm, data: data as! [User])
                     } else if data is [Group]{
