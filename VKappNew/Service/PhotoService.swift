@@ -40,7 +40,9 @@ class PhotoService {
         self.container = Collection(collectionView: container)
     }
     
-   
+    /// Получение пути к файлу из url
+    /// - Parameter url
+    /// - Returns: строка с адресом к файлу
     private func getFilePath(url: String) -> String? {
         guard let cashesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first else {
             return nil
@@ -51,6 +53,10 @@ class PhotoService {
         return cashesDirectory.appendingPathComponent(PhotoService.pathName + "/" + hashName).path
     }
     
+    /// Сохранение изображения по указанному пути в файловую систему
+    /// - Parameters:
+    ///   - url: путь
+    ///   - image: изображение
     private func saveImageToCache(url: String, image: UIImage) {
         guard let fileLocalyPath = getFilePath(url: url),
             let data = image.pngData()
@@ -60,7 +66,10 @@ class PhotoService {
         
         FileManager.default.createFile(atPath: fileLocalyPath, contents: data, attributes: nil)
     }
-
+    
+    /// Получение изображения из файловой системы
+    /// - Parameter url
+    /// - Returns: изображение
     private func getImageFromCache(url: String) -> UIImage? {
         guard let fileLocalyPath = getFilePath(url: url),
             let info = try? FileManager.default.attributesOfItem(atPath: fileLocalyPath),
@@ -84,6 +93,10 @@ class PhotoService {
         return image
     }
     
+    /// Загрузка фото из сети с обновлением строки
+    /// - Parameters:
+    ///   - indexPath: номер строки для загрузки и обновления
+    ///   - url: адрес для загрузки изображения
     private func loadPhoto(atIndexPath indexPath: IndexPath, byUrl url: String) {
         AF.request(url).responseData(
             queue: DispatchQueue.global(),
@@ -107,6 +120,11 @@ class PhotoService {
         )
     }
     
+    /// получение фото из кэша или из сети
+    /// - Parameters:
+    ///   - indexPath: строка для обновления
+    ///   - url: адрес изображения
+    /// - Returns: изображение
     func getPhoto(atIndexPath indexPath: IndexPath, byUrl url: String) -> UIImage? {
         var image: UIImage?
         
